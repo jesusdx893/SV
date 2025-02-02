@@ -1,0 +1,185 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fad7df;
+    font-family: sans-serif;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 4rem; /* Mayor espacio entre elementos */
+}
+
+.container-letter {
+    position: relative;
+    cursor: pointer; /* Para indicar que la carta es interactiva */
+    animation: float 3s ease-in-out infinite; /* Animación de flotación */
+}
+
+.cover {
+    position: absolute;
+    border-left: 300px solid transparent; /* Aumentar tamaño */
+    border-right: 300px solid transparent; /* Aumentar tamaño */
+    border-top: 150px solid #fe3334; /* Aumentar tamaño */
+    border-bottom: 150px solid transparent; /* Aumentar tamaño */
+    transition: transform 0.75s;
+    transform-origin: top;
+    font-weight: 900; /* Hacer la fuente más gruesa */
+}
+
+.paper {
+    position: absolute;
+    padding: 3rem; /* Aumentar el tamaño del padding */
+    line-height: 2.5rem; /* Aumentar el interlineado */
+    right: 5px;
+    background: white;
+    width: 590px; /* Aumentar el ancho */
+    height: 300px; /* Aumentar la altura */
+    z-index: -1;
+    transition: all 0.75s;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); /* Aumentar la sombra */
+    border-radius: 15px; /* Bordes más redondeados */
+}
+
+.letter {
+    border-left: 300px solid #ff989e; /* Aumentar el tamaño */
+    border-right: 300px solid #ff989e; /* Aumentar el tamaño */
+    border-top: 150px solid transparent; /* Aumentar el tamaño */
+    border-bottom: 150px solid #ff858a; /* Aumentar el tamaño */
+}
+
+.open-cover {
+    transform: rotatex(180deg);
+}
+
+.open-paper {
+    animation: openPaper 0.75s forwards;
+}
+
+@keyframes openPaper {
+    0% {
+        top: 0;
+    }
+    100% {
+        top: -200px; /* Aumentar el desplazamiento */
+    }
+}
+
+.close-paper {
+    animation: closePaper 0.75s forwards;
+}
+
+@keyframes closePaper {
+    0% {
+        top: -200px; /* Aumentar el desplazamiento */
+    }
+    100% {
+        top: 0;
+    }
+}
+
+.heart {
+    display: none;
+    position: absolute;
+    top: 80%;
+    left: 50%; /* Centrar el corazón */
+    transform: translate(-50%, -50%);
+    font-size: 8rem; /* Hacer el corazón más grande */
+    animation: growHeart 1s forwards;
+}
+
+@keyframes growHeart {
+    0% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(4); /* Aumentar el tamaño del corazón */
+    }
+}
+
+.hearts-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.heart-animation {
+    position: absolute;
+    font-size: 3rem; /* Aumentar tamaño de los corazones flotantes */
+    color: #fe3334; /* Rojo */
+    animation: heartFloat 2s forwards;
+}
+
+@keyframes heartFloat {
+    0% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(2) translateY(-150px); /* Aumentar el movimiento hacia arriba */
+        opacity: 0;
+    }
+}
+
+/* Animación para el efecto flotante */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0); /* Sin movimiento */
+    }
+    50% {
+        transform: translateY(-15px); /* Desplazamiento hacia arriba más grande */
+    }
+}
+
+/* Cambiar color y hacer texto más grueso */
+#mainMessage, .heart, .paper, .cover {
+    color: #fe3334; /* Rojo */
+    font-weight: bold; /* Texto grueso */
+    font-size: 3rem; /* Aumentar tamaño del texto */
+    text-align: center; /* Centrar el texto */
+    word-spacing: 5rem; /* Aumentar el espaciado entre palabras */
+    line-height: 1.5; /* Aumentar espacio entre líneas (ajustar según necesidad) */
+}
+
+/* Estilo para los botones */
+.buttons-container {
+    display: none; /* Inicialmente ocultos */
+    justify-content: center;
+    gap: 2rem; /* Mayor espacio entre los botones */
+    margin-top: 2rem; /* Espacio arriba de los botones */
+}
+
+.btn-yes, .btn-no {
+    padding: 1.5rem 3rem; /* Botones más grandes */
+    background-color: #ff3366;
+    border: none;
+    border-radius: 25px;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-yes:hover, .btn-no:hover {
+    background-color: #ff1a4d;
+}

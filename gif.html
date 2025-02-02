@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Triste</title>
+    <script>
+        // Redirige a index.html cuando la página se recarga
+        if (performance.navigation.type === 1) {
+            window.location.href = 'index.html';
+        }
+    </script>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #fad7df, #FF69B4); /* Fondo bonito */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Evita barras de desplazamiento */
+        }
+
+        .gif-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .gif-container img {
+            width: 200%; /* Tamaño ajustable del GIF */
+            max-width: 600px; /* Tamaño máximo */
+            border-radius: 15px; /* Bordes redondeados para hacerlo más estético */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gif-container">
+        <img src="https://i.pinimg.com/originals/d5/79/aa/d579aa6558775ef99a765fab7b6088e0.gif" alt="Gif bonito">
+    </div>
+
+</body>
+</html>

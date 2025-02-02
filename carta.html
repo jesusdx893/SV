@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Redirige a index.html cuando la página se recarga
+        if (performance.navigation.type === 1) {
+            window.location.href = 'index.html';
+        } else {
+            // Si no es una recarga, establece la bandera 'isRefreshed' en localStorage
+            if (localStorage.getItem('isRefreshed')) {
+                window.location.href = 'index.html';
+            } else {
+                localStorage.setItem('isRefreshed', 'true');
+            }
+
+            // Limpia el flag cuando la página se cierre
+            window.addEventListener('beforeunload', function() {
+                localStorage.removeItem('isRefreshed');
+            });
+        }
+    </script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #fad7df;
+            position: relative;
+            overflow: hidden; /* Ocultar elementos fuera de la pantalla */
+            font-family: 'Roboto', sans-serif; /* Fuente más bonita */
+        }
+
+        /* Estilos de la tarjeta */
+        #card {
+            height: 600px;
+            width: 900px;
+            position: absolute; /* Cambiado a absolute */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Centrado */
+            display: flex;
+            opacity: 0; /* Empieza invisible */
+            flex-direction: column;
+            transform-style: preserve-3d;
+            transition: transform 1s;
+            z-index: 1; /* Aseguramos que la tarjeta esté por encima de los corazones */
+        }
+
+        #card h2 {
+            font-size: 3em;
+            margin: 0;
+            color: pink;
+            text-align: center;
+            font-weight: bold; /* Negrita */
+        }
+
+        #card p {
+            font-size: 1.5em;
+            text-align: justify;
+            padding-left: 30px;
+            padding-right: 30px;
+            font-weight: bold; /* Negrita */
+        }
+
+        /* Efecto 3D para la animación ondulante */
+        #card .card-content {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: rotateX(0deg);
+        }
+
+        /* Corazones flotantes */
+        .heart {
+            position: absolute;
+            font-size: 8rem; /* Corazones más grandes */
+            color: #ff4081;
+            animation: floatUp 5s ease-out infinite;
+            opacity: 0;
+        }
+
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+            50% {
+                transform: translateY(-200px) scale(2);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-400px) scale(1);
+            }
+        }
+
+        /* Estilos para los gifs en las esquinas */
+        .corner-gif {
+            position: absolute;
+            width: 400px; /* Gifs más grandes */
+            height: 400px;
+            opacity: 0; /* Inicialmente invisibles */
+            animation: showGif 1s forwards; /* Mostrar los gifs después de 1 segundo */
+        }
+
+        .bottom-left {
+            bottom: 0;
+            left: 0;
+        }
+
+        .bottom-right {
+            bottom: 0;
+            right: 0;
+        }
+
+        /* Animación para los gifs */
+        @keyframes showGif {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Corazones flotantes (que aparecerán primero durante 5 segundos) -->
+    <div class="heart" style="left: 50%; animation-delay: 0s;">❤️</div>
+    <div class="heart" style="left: 10%; animation-delay: 1s;">❤️</div>
+    <div class="heart" style="left: 90%; animation-delay: 2s;">❤️</div>
+    <div class="heart" style="left: 30%; animation-delay: 3s;">❤️</div>
+    <div class="heart" style="left: 70%; animation-delay: 4s;">❤️</div>
+
+    <!-- Los gifs en las esquinas inferiores -->
+    <img src="https://i.pinimg.com/originals/47/6b/85/476b85783b816fef1d2c56ebe247cc0f.gif" class="corner-gif bottom-left" alt="gif esquina izquierda">
+    <img src="https://i.pinimg.com/originals/9e/c2/a2/9ec2a2e85e39cc2c9104de3b5b8a40c6.gif" class="corner-gif bottom-right" alt="gif esquina derecha">
+
+    <!-- La carta -->
+    <div id="card">
+        <div class="card-content">
+            <h2>Valeria mi amor sabía que dirías que si</h2>
+            <p>Mi niña preciosa:</p>
+            <p>Desde el primer momento en que se cruzaron nuestras miradas, supe que nuestra historia sería única.</p>
+            <p>Desde que llegaste, cada día se ha vuelto más hermoso.</p>
+            <p>Este 14 de febrero, quiero estar a tu lado, abrazándote y darte muchos besitos 💕</p>
+            <p>Te quiero con todo mi corazón: Jesús. 💕</p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Primero, mostrar los corazones durante 5 segundos
+            setTimeout(function() {
+                $('.heart').css('opacity', 1); // Hacer que los corazones sean visibles
+            }, 500);
+
+            // Después de 5 segundos, aparecer la carta con un efecto de desvanecimiento
+            setTimeout(function() {
+                $('#card').css('opacity', 1);
+            }, 1000); // Desvanecimiento de la carta después de 5 segundos
+
+            // Los corazones siguen apareciendo durante el tiempo que la carta esté visible
+            setInterval(function() {
+                let randomLeft = Math.random() * 100 + '%'; // Posición aleatoria horizontal
+                let randomDelay = Math.random() * 5 + 's'; // Retraso aleatorio para la animación
+                let heart = $('<div class="heart" style="left:' + randomLeft + '; animation-delay: ' + randomDelay + ';">❤️</div>');
+                $('body').append(heart);
+            }, 500); // Agregar un nuevo corazón cada medio segundo
+        });
+    </script>
+
+</body>
+</html>
